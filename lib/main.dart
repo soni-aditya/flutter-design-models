@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_patterns/class_1.dart';
+import 'package:flutter_design_patterns/class_2.dart';
+import 'package:flutter_design_patterns/my_counter.dart';
 import 'package:random_pk/random_pk.dart';
 
 void main() => runApp(MyApp());
@@ -50,59 +53,6 @@ class _HomePageState extends State<HomePage> {
         },
         child: Icon(Icons.add),
       ),
-    );
-  }
-}
-
-class MyCounter {
-  int count;
-
-  MyCounter(this.count);
-
-  increaseCount() {
-    count += 1;
-  }
-}
-
-class Class1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'Class 1',
-      style: Theme.of(context).textTheme.headline,
-    );
-  }
-}
-
-class Class2 extends StatelessWidget {
-  final MyCounter myCounter;
-
-  Class2(this.myCounter);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          'Class 2',
-          style: Theme.of(context).textTheme.headline,
-        ),
-        Class3(myCounter)
-      ],
-    );
-  }
-}
-
-class Class3 extends StatelessWidget {
-  final MyCounter myCounter;
-
-  Class3(this.myCounter);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'Class 3 : ${myCounter.count}',
-      style: Theme.of(context).textTheme.headline,
     );
   }
 }
