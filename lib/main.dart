@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_design_patterns/class_1.dart';
 import 'package:flutter_design_patterns/class_2.dart';
+import 'package:flutter_design_patterns/count_provider.dart';
 import 'package:flutter_design_patterns/my_counter.dart';
 import 'package:random_pk/random_pk.dart';
 
@@ -28,30 +29,33 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Default'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Class1(),
-            Class2(myCounter),
-            RandomContainer(
-              height: 100.0,
-              width: 100.0,
-            )
-          ],
+    return CountProvider(
+      myCounter: myCounter,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Default'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            myCounter.increaseCount();
-          });
-        },
-        child: Icon(Icons.add),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Class1(),
+              Class2(),
+              RandomContainer(
+                height: 100.0,
+                width: 100.0,
+              )
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              myCounter.increaseCount();
+            });
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
