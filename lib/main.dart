@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_design_patterns/class_1.dart';
 import 'package:flutter_design_patterns/class_2.dart';
-import 'package:flutter_design_patterns/counter_model.dart';
+import 'package:flutter_design_patterns/count_bloc_provider.dart';
+import 'package:flutter_design_patterns/counter_bloc.dart';
 import 'package:flutter_design_patterns/my_counter.dart';
 import 'package:random_pk/random_pk.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,8 +30,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModel(
-      model: CounterModel(),
+    var myCounter = MyCounter(0);
+    CounterBloc counterBloc = CounterBloc();
+    return CountBlocProvider(
+      bloc: counterBloc,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Default'),
@@ -49,14 +51,13 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        floatingActionButton: ScopedModelDescendant<CounterModel>(
-          rebuildOnChange: false,
-          builder: (context, child, model) => FloatingActionButton(
-                onPressed: () {
-                  model.addToCount();
-                },
-                child: Icon(Icons.add),
-              ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            //Adding to sink
+            counterBloc.add.add(myCounter);
+            //
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );
